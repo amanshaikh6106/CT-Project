@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Shaikh Aman</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── ABOUT LAYOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    /* ── LEFT: VISUAL CARD ── */
+    .about-visual {
+      position: sticky;
+      top: 100px;
+    }
+
+    .avatar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .avatar-big {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--bg3), var(--surface2));
+      border: 3px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 auto 20px;
+      box-shadow: 0 0 40px rgba(108, 99, 255, 0.2);
+    }
+
+    .avatar-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .avatar-title {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .avatar-info-list {
+      list-style: none;
+      text-align: left;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .avatar-info-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .info-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: rgba(108, 99, 255, 0.1);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent-light);
+    }
+
+    .info-icon svg { width: 15px; height: 15px; }
+
+    .info-val {
+      color: var(--text);
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .info-val a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    .info-val a:hover { text-decoration: underline; }
+
+    /* ── QUICK FACTS ── */
+    .quick-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .fact-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      transition: var(--transition);
+    }
+
+    .fact-chip:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .fact-chip-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .fact-chip-val {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ── RIGHT: CONTENT ── */
+    .about-content p {
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .about-content p strong { color: var(--text); font-weight: 600; }
+
+    /* ── JOURNEY TIMELINE ── */
+    .timeline { margin-top: 48px; }
+
+    .timeline-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 36px;
+      bottom: -32px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item:last-child::before { display: none; }
+
+    .timeline-dot {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-body { padding-top: 4px; }
+
+    .timeline-date {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-heading {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .timeline-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── INTERESTS ── */
+    .interests {
+      margin-top: 48px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .interest-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: var(--transition);
+      cursor: default;
+    }
+
+    .interest-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent-light);
+      background: rgba(108, 99, 255, 0.08);
+    }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-visual { position: static; }
+    }
+
+    @media (max-width: 480px) {
+      .quick-facts { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <nav>
+    <a class="nav-logo" href="index.html">Shaikh<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about_me.html" class="active">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="project.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <section class="section">
+      <div class="section-tag animate-fadeup">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>
+        About Me
+      </div>
+      <h1 class="section-title animate-fadeup delay-1">Who I Am &amp; <span>What I Do</span></h1>
+      <div class="accent-line animate-fadeup delay-2"></div>
+
+      <div class="about-grid">
+        <!-- LEFT -->
+        <div class="about-visual animate-fadeup delay-2">
+          <div class="avatar-card">
+            <div class="avatar-big">SA</div>
+            <div class="avatar-name">Shaikh Aman</div>
+            <div class="avatar-title">Full Stack Developer</div>
+            <ul class="avatar-info-list">
+              <li>
+                <div class="info-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:11px; color:var(--text-muted); margin-bottom:1px;">Email</div>
+                  <div class="info-val"><a href="mailto:amanjshaikh6106@gmail.com">amanjshaikh6106@gmail.com</a></div>
+                </div>
+              </li>
+              <li>
+                <div class="info-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.12 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17z"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:11px; color:var(--text-muted); margin-bottom:1px;">Phone</div>
+                  <div class="info-val"><a href="tel:9834295369">+91 98342 95369</a></div>
+                </div>
+              </li>
+              <li>
+                <div class="info-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:11px; color:var(--text-muted); margin-bottom:1px;">GitHub</div>
+                  <div class="info-val"><a href="https://github.com/amanshaikh6106" target="_blank">amanshaikh6106</a></div>
+                </div>
+              </li>
+              <li>
+                <div class="info-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:11px; color:var(--text-muted); margin-bottom:1px;">Location</div>
+                  <div class="info-val">India</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- quick facts -->
+          <div class="quick-facts">
+            <div class="fact-chip">
+              <div class="fact-chip-label">Status</div>
+              <div class="fact-chip-val" style="color: #4ADE80;">Open to Work</div>
+            </div>
+            <div class="fact-chip">
+              <div class="fact-chip-label">Experience</div>
+              <div class="fact-chip-val">2+ Years</div>
+            </div>
+            <div class="fact-chip">
+              <div class="fact-chip-label">Projects</div>
+              <div class="fact-chip-val">15+ Built</div>
+            </div>
+            <div class="fact-chip">
+              <div class="fact-chip-label">Languages</div>
+              <div class="fact-chip-val">EN / HI / UR</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="about-content animate-fadeup delay-3">
+          <p>
+            Hi! I'm <strong>Shaikh Aman</strong>, a passionate and dedicated developer with a strong focus on building
+            clean, efficient, and visually appealing digital products. I thrive at the intersection of
+            design and engineering.
+          </p>
+          <p>
+            I specialize in <strong>full-stack web development</strong>, working across the entire spectrum — from
+            crafting intuitive frontend interfaces to designing robust backend systems. I'm driven by curiosity
+            and constantly exploring new technologies.
+          </p>
+          <p>
+            When I'm not coding, you'll find me contributing to <strong>open-source projects</strong>, exploring
+            new frameworks, or tinkering with side projects that push my skillset further. I believe great
+            software is built by developers who care deeply about quality and user experience.
+          </p>
+          <p>
+            I'm currently looking for exciting opportunities where I can contribute meaningfully, grow professionally,
+            and work with talented people on challenging problems.
+          </p>
+
+          <div style="display:flex; gap:12px; margin-top:8px; flex-wrap:wrap;">
+            <a href="project.html" class="btn btn-primary">View Projects</a>
+            <a href="contact.html" class="btn btn-outline">Contact Me</a>
+          </div>
+
+          <!-- TIMELINE -->
+          <div class="timeline">
+            <div class="timeline-title">My Journey</div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot">🎓</div>
+              <div class="timeline-body">
+                <div class="timeline-date">2020 – 2024</div>
+                <div class="timeline-heading">Computer Science Degree</div>
+                <div class="timeline-desc">Pursued a degree in Computer Science, building a strong foundation in algorithms, data structures, and software engineering principles.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot">💡</div>
+              <div class="timeline-body">
+                <div class="timeline-date">2022</div>
+                <div class="timeline-heading">Started Web Development</div>
+                <div class="timeline-desc">Began learning web technologies — HTML, CSS, JavaScript — and built my first full projects, falling in love with frontend development.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot">🚀</div>
+              <div class="timeline-body">
+                <div class="timeline-date">2023</div>
+                <div class="timeline-heading">Expanded to Full Stack</div>
+                <div class="timeline-desc">Mastered React, Node.js, and databases. Completed multiple real-world projects and started contributing to open-source.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot">🌟</div>
+              <div class="timeline-body">
+                <div class="timeline-date">2024 – Present</div>
+                <div class="timeline-heading">Professional Developer</div>
+                <div class="timeline-desc">Actively building projects, sharpening skills, and seeking exciting opportunities to make a real impact with technology.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- INTERESTS -->
+          <div style="margin-top:48px;">
+            <div class="timeline-title">Interests & Hobbies</div>
+            <div class="interests">
+              <span class="interest-tag">💻 Coding</span>
+              <span class="interest-tag">🎨 UI/UX Design</span>
+              <span class="interest-tag">📚 Reading Tech</span>
+              <span class="interest-tag">🎮 Gaming</span>
+              <span class="interest-tag">🌐 Open Source</span>
+              <span class="interest-tag">🤖 AI / ML</span>
+              <span class="interest-tag">☕ Coffee Addict</span>
+              <span class="interest-tag">🎵 Music</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <span>© 2025 Shaikh Aman. All rights reserved.</span>
+    <a href="https://github.com/amanshaikh6106" target="_blank">github.com/amanshaikh6106</a>
+  </footer>
+
+</body>
+</html>
